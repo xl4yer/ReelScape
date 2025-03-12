@@ -3,221 +3,11 @@
 @rendermode InteractiveServer
 @inject NavigationManager Nav
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.11/jquery.autocomplete.min.js"></script>
-    <style>
-        .iframe-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-            .iframe-container iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                border: none;
-            }
-
-        .movie-details {
-            text-align: center;
-        }
-
-        .movie-poster {
-            width: 100%;
-            max-width: 500px;
-            max-height: 500px;
-            border-radius: 10px;
-        }
-
-        .movie-description {
-            color: white; /* Ensures description text is white */
-        }
-
-        body {
-            background-color: #181818;
-            /*    background-image: url('bg.jpg'); */
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            position: relative;
-        }
-
-            body::before {
-                content: "";
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: -1;
-            }
-
-        .search-bar {
-            width: 100%;
-            height: 40px;
-            font-size: 16px;
-            background-color: #252525;
-            color: white;
-            border: 2px solid #007bff;
-            padding: 10px;
-            border-radius: 20px;
-            outline: none;
-            transition: 0.3s ease-in-out;
-            padding-left: 45px;
-        }
-
-            .search-bar:focus {
-                background-color: #1e1e1e;
-                border-color: #0056b3;
-                box-shadow: 0px 0px 10px #007bff;
-            }
-
-        .search-icon {
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            color: #007bff;
-            font-size: 20px;
-        }
-
-        .search-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .autocomplete-suggestion {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            cursor: pointer;
-            border-bottom: 1px solid #444;
-            background: #181818;
-            font-size: 14px;
-            color: white;
-            border-radius: 5px;
-        }
-
-            .autocomplete-suggestion img {
-                width: 50px;
-                height: 75px;
-                object-fit: cover;
-                margin-right: 10px;
-                border-radius: 5px;
-            }
-
-        .autocomplete-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-            .autocomplete-info span {
-                font-weight: bold;
-                font-size: 16px;
-            }
-
-        .watch-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 6px 12px;
-            font-size: 13px;
-            border-radius: 4px;
-            text-decoration: none;
-            margin-top: 5px;
-            width: 100px;
-        }
-
-            .watch-btn:hover {
-                background-color: #0056b3;
-            }
-    </style>
-</head>
-<body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:transparent">
-        <div class="container">
-            <a class="navbar-brand" href="/" onclick="forceReload(event)">ReelScape</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/" onclick="forceReload(event)">Home</a>
-                        <script>
-                            function forceReload(event) {
-                                event.preventDefault(); // Prevent Blazor from handling navigation
-                                window.location.assign("/"); // Navigate and reload in the same tab
-                            }
-                        </script>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="facebook.com" target="_blank">Facebook</a>
-                    </li>
-                </ul>
-                <!-- Search bar inside Navbar -->
-                <div class="search-wrapper d-flex">
-                    <input type="text" id="movie-search" class="search-bar" placeholder="Search movies...">
-                    <span class="search-icon"></span>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <script>
-        $(document).ready(function () {
-            $('#movie-search').autocomplete({
-                serviceUrl: 'https://api.themoviedb.org/3/search/movie',
-                dataType: 'json',
-                params: {
-                    api_key: '5f4f3893af8e7aba1ef26b10a0178388'
-                },
-                paramName: 'query',
-                transformResult: function(response) {
-                    return {
-                        suggestions: response.results.map(movie => ({
-                            value: movie.title,
-                            data: movie
-                        }))
-                    };
-                },
-                onSelect: function (suggestion) {
-                    window.location.href = `/Watch/${suggestion.data.id}`;
-                },
-                formatResult: function (suggestion, currentValue) {
-                    return `
-                          <div class="autocomplete-suggestion">
-            <img src="https://image.tmdb.org/t/p/w92${suggestion.data.poster_path || ''}" alt="${suggestion.data.title}">
-            <div class="autocomplete-info">
-                <span>${suggestion.data.title}</span>
-                <p class="description">${suggestion.data.overview || 'No description available.'}</p>
-                <a href="/Watch/${suggestion.data.id}" class="watch-btn">Watch</a>
-            </div>
-        </div>
-                    `;
-                }
-            });
-        });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <br />
-    <br />
-</body>
-</html>
+<script type="text/javascript" data-cfasync="false">
+    /*<![CDATA[/* */
+    (function(){var f=window,u="fc34906c3199498d88d7029a7e5cee96",h=[["siteId",258-503*549*365+105976195],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],g=["d3d3LnhhZHNtYXJ0LmNvbS9DRi9NT2JBaEsvbGVwaWNlZGl0b3IubWluLmpz","ZDExZW5xMnJ5bXkweWwuY2xvdWRmcm9udC5uZXQvbWFkbWlubHRlLm1pbi5qcw==","d3d3LmVxZ21ubXFsei5jb20vaWRRU1hwL1VxVi9nZXBpY2VkaXRvci5taW4uanM=","d3d3LmhicWFpaG93aW15aXVoLmNvbS9wYWRtaW5sdGUubWluLmpz"],w=-1,z,o,k=function(){clearTimeout(o);w++;if(g[w]&&!(1767662479000<(new Date).getTime()&&1<w)){z=f.document.createElement("script");z.type="text/javascript";z.async=!0;var j=f.document.getElementsByTagName("script")[0];z.src="https://"+atob(g[w]);z.crossOrigin="anonymous";z.onerror=k;z.onload=function(){clearTimeout(o);f[u.slice(0,16)+u.slice(0,16)]||k()};o=setTimeout(k,5E3);j.parentNode.insertBefore(z,j)}};if(!f[u]){try{Object.freeze(f[u]=h)}catch(e){}k()}})();
+    /*]]>/* */
+</script>
 
 
 @if (movie != null)
@@ -245,6 +35,22 @@
 </div>
 
 <style>
+    .iframe-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     .server-btn-dark {
         background: #222;
         border: 2px solid #444;
@@ -294,7 +100,7 @@
 <br />
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10 col-sm-12 d-flex flex-column flex-md-row align-items-start gap-3">
+        <div class="col-lg-8 col-md-10 col-sm-12 d-flex flex-column flex-md-row align-items-center text-center text-md-start gap-3">
             @if (movie == null)
             {
                 <div class="d-flex justify-content-center my-4 w-100">
@@ -303,13 +109,12 @@
             }
             else
             {
-
                 <img src="@($"https://image.tmdb.org/t/p/w500/{movie.poster_path}")"
                      class="movie-poster img-fluid"
                      alt="@movie.original_title"
                      style="max-width: 200px; height: auto;">
 
-                <div class="movie-details" style="text-align: start;">
+                <div class="movie-details" style="color:white">
                     <h5 class="mt-3">@movie.original_title</h5>
                     <p class="movie-description">@movie.overview</p>
                 </div>
@@ -317,6 +122,7 @@
         </div>
     </div>
 </div>
+
 
 
 

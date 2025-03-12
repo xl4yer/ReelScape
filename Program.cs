@@ -1,7 +1,9 @@
+using MudBlazor.Services;
 using ReelScape.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddMudServices();
 builder.Services.AddHttpClient();
 // Add services to the container.
 builder.Services.AddRazorComponents()

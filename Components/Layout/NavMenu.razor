@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">ReelScape</a>
+        <a class="navbar-brand" href="" style="font-family:'Segoe Script'">ReelScape</a>
     </div>
 </div>
 
@@ -9,22 +9,189 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="nav flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            <NavLink class="nav-link" href="" onclick="forceReload1(event)" Match="NavLinkMatch.All">
+                <span class="fa fa-home"></span> &nbsp;&nbsp; <span>Home</span>
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="action" onclick="forceReload2(event)">
+                <span class="fa fa-bolt"></span> &nbsp;&nbsp; <span>Action</span>
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+            <NavLink class="nav-link" href="adventure" onclick="forceReload3(event)">
+                <span class="fa fa-map"></span> &nbsp;&nbsp; <span>Adventure</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="animation" onclick="forceReload4(event)">
+                <span class="fa fa-film"></span> &nbsp;&nbsp; <span>Animation</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="comedy" onclick="forceReload5(event)">
+                <span class="fa fa-laugh"></span> &nbsp;&nbsp; <span>Comedy</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="crime" onclick="forceReload6(event)">
+                <span class="fa fa-mask"></span> &nbsp;&nbsp; <span>Crime</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="drama" onclick="forceReload7(event)">
+                <span class="fa fa-theater-masks"></span> &nbsp;&nbsp; <span>Drama</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="family" onclick="forceReload8(event)">
+                <span class="fa fa-users"></span> &nbsp;&nbsp; <span>Family</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="fantasy" onclick="forceReload9(event)">
+                <span class="fa fa-hat-wizard"></span> &nbsp;&nbsp; <span>Fantasy</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="history" onclick="forceReload10(event)">
+                <span class="fa fa-landmark"></span> &nbsp;&nbsp; <span>History</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="horror" onclick="forceReload11(event)">
+                <span class="fa fa-ghost"></span> &nbsp;&nbsp; <span>Horror</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="music" onclick="forceReload12(event)">
+                <span class="fa fa-music"></span> &nbsp;&nbsp; <span>Music</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="mystery" onclick="forceReload13(event)">
+                <span class="fa fa-user-secret"></span> &nbsp;&nbsp; <span>Mystery</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="romance" onclick="forceReload14(event)">
+                <span class="fa fa-heart"></span> &nbsp;&nbsp; <span>Romance</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="sci-fi" onclick="forceReload15(event)">
+                <span class="fa fa-rocket"></span> &nbsp;&nbsp; <span>Sci-Fi</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="thriller" onclick="forceReload16(event)">
+                <span class="fa fa-skull-crossbones"></span> &nbsp;&nbsp; <span>Thriller</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="war" onclick="forceReload17(event)">
+                <span class="fa fa-fighter-jet"></span> &nbsp;&nbsp; <span>War</span>
             </NavLink>
         </div>
     </nav>
 </div>
 
+
+<script>
+    function forceReload1(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/"); // Navigate and reload in the same tab
+    }
+     function forceReload2(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/action"); // Navigate and reload in the same tab
+    }
+     function forceReload3(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/adventure"); // Navigate and reload in the same tab
+    }
+     function forceReload4(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/animation"); // Navigate and reload in the same tab
+    }
+     function forceReload5(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/comedy"); // Navigate and reload in the same tab
+    }
+
+     function forceReload6(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/crime"); // Navigate and reload in the same tab
+    }
+
+     function forceReload7(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/drama"); // Navigate and reload in the same tab
+    }
+
+      function forceReload8(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/family"); // Navigate and reload in the same tab
+    }
+
+      function forceReload9(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/fantasy"); // Navigate and reload in the same tab
+    }
+
+      function forceReload10(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/history"); // Navigate and reload in the same tab
+    }
+
+     function forceReload11(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/horror"); // Navigate and reload in the same tab
+    }
+
+     function forceReload12(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/music"); // Navigate and reload in the same tab
+    }
+
+     function forceReload13(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/mystery"); // Navigate and reload in the same tab
+    }
+    
+       function forceReload14(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/romance"); // Navigate and reload in the same tab
+    }
+
+      function forceReload15(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/sci-fi"); // Navigate and reload in the same tab
+    }
+
+      function forceReload16(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/thriller"); // Navigate and reload in the same tab
+    }
+
+      function forceReload17(event) {
+        event.preventDefault(); // Prevent Blazor from handling navigation
+        window.location.assign("/war"); // Navigate and reload in the same tab
+    }
+</script>
