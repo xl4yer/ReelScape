@@ -13,13 +13,14 @@ main {
 }
 
 .top-row {
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #d6d5d5;
+    background: linear-gradient(to right, #ffffff, #d4a017, #ffffff);
+    /* border-bottom: 1px solid #b38e12;*/
     justify-content: flex-end;
     height: 3.5rem;
     display: flex;
     align-items: center;
 }
+
 
     .top-row ::deep a, .top-row ::deep .btn-link {
         white-space: nowrap;
