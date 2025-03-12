@@ -20,8 +20,6 @@
                      
                     }
 
-                      
-
                     .search-wrapper {
                         position: relative;
                         width: 100%;
@@ -139,8 +137,8 @@
                                       <div class="autocomplete-suggestion">
                         <img src="https://image.tmdb.org/t/p/w92${suggestion.data.poster_path || ''}" alt="${suggestion.data.title}">
                         <div class="autocomplete-info">
-                            <span>${suggestion.data.title}</span>
-                            <p class="description">${suggestion.data.overview || 'No description available.'}</p>
+                                       <span>${suggestion.data.title} (${new Date(suggestion.data.release_date).getFullYear()})</span>
+                <p class="description">${suggestion.data.overview || 'No description available'}</p>
                                              <a href="javascript:void(0);" class="watch-btn"
                        onclick="window.location.href='/Watch/${suggestion.data.id}';">
                        Watch Now
